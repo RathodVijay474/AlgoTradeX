@@ -17,7 +17,7 @@ dependencies = [
   "PyYAML>=6.0",
   "scipy>=1.11",
   "yfinance>=0.2.40",
-  "plotly 6.6.0"
+  "plotly>=6.6.0"
 ]
 
 [project.optional-dependencies]
