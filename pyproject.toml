@@ -22,7 +22,7 @@ dependencies = [
 
 [project.optional-dependencies]
 app = [
-  "plotly>=5.22",
+  "plotly>=6.6.0",
   "stable-baselines3>=2.3.0",
   "streamlit>=1.36",
 ]
