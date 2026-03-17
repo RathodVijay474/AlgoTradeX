@@ -1,0 +1,40 @@
+{
+  "mean": {
+    "feature_open": 70.77024212012621,
+    "feature_high": 71.56362450662719,
+    "feature_low": 70.00646401444554,
+    "feature_close": 70.81763795140756,
+    "feature_volume": 132144205.20562208,
+    "feature_return_1": 0.0010251944697504333,
+    "feature_return_5": 0.005141796612564016,
+    "feature_gap_open": 0.0002901691984377566,
+    "feature_intraday_range": 0.020165284367931576,
+    "feature_price_to_sma_10": 0.004132867365239249,
+    "feature_price_to_sma_20": 0.008991823676049174,
+    "feature_volatility_20": 0.016714695474796752,
+    "feature_volume_zscore_20": -0.02254513312593193,
+    "feature_rsi": 55.299775285701934,
+    "feature_macd": 0.48528405595116736,
+    "feature_macd_signal": 0.4882361167810023,
+    "feature_macd_hist": -0.0029520608298349163
+  },
+  "std": {
+    "feature_open": 47.87489645105295,
+    "feature_high": 48.49326094086901,
+    "feature_low": 47.2650516819606,
+    "feature_close": 47.90116132675615,
+    "feature_volume": 66802968.23948216,
+    "feature_return_1": 0.018540212734300034,
+    "feature_return_5": 0.03842023818527884,
+    "feature_gap_open": 0.012166618437901061,
+    "feature_intraday_range": 0.012289296984174658,
+    "feature_price_to_sma_10": 0.029063881744991697,
+    "feature_price_to_sma_20": 0.043878379500412956,
+    "feature_volatility_20": 0.008141191381853033,
+    "feature_volume_zscore_20": 1.0710562625561093,
+    "feature_rsi": 13.075808094807467,
+    "feature_macd": 1.7579864766123448,
+    "feature_macd_signal": 1.6465130278498517,
+    "feature_macd_hist": 0.5467012690567611
+  }
+}

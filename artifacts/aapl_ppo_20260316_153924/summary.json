@@ -1,0 +1,8 @@
+{
+  "run_dir": "artifacts\\aapl_ppo_20260316_153924",
+  "model_path": "artifacts\\aapl_ppo_20260316_153924\\models\\ppo_model.zip",
+  "validation_sharpe": 0.5891285562395928,
+  "validation_total_return": 0.20956070256840675,
+  "test_sharpe": 0.9496761823494503,
+  "test_total_return": 0.4595594287626561
+}

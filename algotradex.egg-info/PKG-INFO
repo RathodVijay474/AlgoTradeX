@@ -1,0 +1,170 @@
+Metadata-Version: 2.4
+Name: algotradex
+Version: 0.1.0
+Summary: Reinforcement-learning research sandbox for autonomous algorithmic trading.
+Author: Vijay Rathod
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: gymnasium<1.1,>=0.29
+Requires-Dist: matplotlib>=3.8
+Requires-Dist: numpy>=1.26
+Requires-Dist: pandas>=2.2
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: scipy>=1.11
+Requires-Dist: yfinance>=0.2.40
+Provides-Extra: app
+Requires-Dist: plotly>=5.22; extra == "app"
+Requires-Dist: stable-baselines3>=2.3.0; extra == "app"
+Requires-Dist: streamlit>=1.36; extra == "app"
+Provides-Extra: rl
+Requires-Dist: stable-baselines3>=2.3.0; extra == "rl"
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+
+# AlgoTradeX
+
+AlgoTradeX is a Python research sandbox for autonomous algorithmic trading with Deep Reinforcement Learning. It provides a complete workflow for:
+
+- loading OHLCV market data from Yahoo Finance or CSV,
+- engineering technical features such as RSI and MACD,
+- training a Gymnasium trading environment with Stable Baselines3,
+- accounting for transaction costs and slippage,
+- backtesting on unseen data splits, and
+- exporting metrics, plots, and a markdown report.
+
+This repository is intentionally focused on the research side of the stack. It is suitable for strategy prototyping, reward engineering, and offline evaluation before promoting logic into a lower-latency execution layer.
+
+## Architecture
+
+The project follows a clean research pipeline:
+
+1. `algotradex.data` loads and validates OHLCV data.
+2. `algotradex.features` computes technical indicators and normalized model features.
+3. `algotradex.env` defines a custom Gymnasium environment with portfolio accounting, slippage, and transaction costs.
+4. `algotradex.training` trains PPO, A2C, or DQN agents via Stable Baselines3.
+5. `algotradex.pipeline` evaluates validation and test splits, computes performance metrics, and writes artifacts.
+
+The environment uses chronological train, validation, and test splits to avoid look-ahead bias. Actions are discrete `sell/flat`, `hold`, and `buy/long`, with a configurable long-only or long-short mode.
+
+## Features
+
+- Custom Gymnasium trading environment
+- PPO, A2C, and DQN support
+- Reward modes for portfolio growth, Sharpe-style optimization, or a hybrid objective
+- Risk-aware penalties for volatility, trading intensity, and drawdown
+- Technical indicators: RSI, MACD, rolling volatility, price momentum, and volume normalization
+- Optional sentiment feature from a CSV column
+- Automatic plots for equity curve, cumulative returns, and trade overlay
+- JSON metrics plus a generated markdown experiment report
+
+## Installation
+
+Use a dedicated virtual environment. For the RL training stack, Python 3.11 or 3.12 is the safest target.
+
+```powershell
+python -m venv .venv
+python -m venv .venv
+pip install --upgrade pip
+pip install -e ".[rl,dev]"
+```
+
+If you only want the data, feature, environment, and metrics layers without Stable Baselines3, install:
+
+```powershell
+pip install -e ".[dev]"
+```
+
+## Quick Start
+
+Train and backtest a PPO agent on AAPL:
+
+```powershell
+python -m algotradex.cli train --config configs\aapl_ppo.yaml
+```
+
+The command creates an `artifacts/` run directory with:
+
+- the trained model,
+- config snapshot,
+- dataset summary,
+- validation and test metrics as JSON,
+- trade/equity history as CSV,
+- performance plots, and
+- a markdown report.
+
+## Data Inputs
+
+The system supports two input modes:
+
+1. Yahoo Finance download using `ticker`, `start_date`, `end_date`, and `interval`
+2. A local CSV with at least `date`, `open`, `high`, `low`, `close`, and `volume`
+
+If you want to add news sentiment, include a column such as `sentiment_score` in your CSV and set `features.sentiment_column` in the config.
+
+## Reward Design
+
+The environment exposes three reward modes:
+
+- `portfolio_value`: reward is step portfolio return
+- `sharpe`: reward emphasizes rolling Sharpe-style risk-adjusted returns
+- `hybrid`: blends return and Sharpe-style reward
+
+The final reward subtracts penalties for:
+
+- realized rolling volatility,
+- trade intensity,
+- portfolio drawdown
+
+This keeps the agent from maximizing raw return through unstable, high-churn behavior.
+
+## Output Metrics
+
+Each validation and test run exports:
+
+- total return
+- annualized return
+- annualized volatility
+- Sharpe ratio
+- Sortino ratio
+- Calmar ratio
+- maximum drawdown
+- win rate
+- average exposure
+- turnover
+- trade count
+- benchmark return
+- excess return vs. buy-and-hold
+
+## Configuration
+
+See `configs/aapl_ppo.yaml` for a full example. The main sections are:
+
+- `data`: source, ticker, time range, and split ratios
+- `features`: indicator settings and optional sentiment column
+- `env`: capital, cost model, slippage, reward design, and risk penalties
+- `training`: algorithm and hyperparameters
+- `output`: artifact directory and run naming
+
+## Testing
+
+Run the unit tests with:
+
+```powershell
+pytest
+```
+
+The test suite covers feature engineering, environment accounting, and performance metric generation.
+
+## Limitations
+
+- The default environment models end-of-bar rebalancing rather than true tick-level execution.
+- Stable Baselines3 training quality is sensitive to reward scaling and hyperparameters.
+- Yahoo Finance data is convenient for research but not a production-grade market data source.
+- This repo does not execute live trades and should not be treated as production OMS or risk infrastructure.
+
+## Suggested Next Steps
+
+- Add walk-forward retraining across rolling market regimes
+- Introduce richer action spaces for fractional sizing
+- Connect alternative data such as sentiment, macro events, or order-book imbalance
+- Mirror the backtest accounting logic inside a C++ execution simulator for research-to-execution parity

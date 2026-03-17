@@ -1,0 +1,48 @@
+data:
+  ticker: AAPL
+  start_date: '2015-01-01'
+  end_date: '2025-12-31'
+  interval: 1d
+  csv_path: null
+  train_split: 0.7
+  validation_split: 0.15
+features:
+  rsi_window: 14
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+  sentiment_column: null
+env:
+  initial_capital: 100000.0
+  transaction_cost_pct: 0.001
+  slippage_pct: 0.0005
+  max_position_size: 1.0
+  allow_short: false
+  reward_mode: hybrid
+  reward_window: 20
+  volatility_penalty: 0.05
+  trade_penalty: 0.001
+  drawdown_penalty: 0.02
+  reward_scale: 100.0
+training:
+  algorithm: ppo
+  total_timesteps: 25000
+  learning_rate: 0.0003
+  batch_size: 64
+  n_steps: 512
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.0
+  dqn_buffer_size: 50000
+  dqn_learning_starts: 1000
+  dqn_train_freq: 4
+  dqn_gradient_steps: 1
+  dqn_target_update_interval: 500
+  dqn_exploration_fraction: 0.1
+  seed: 42
+  policy: MlpPolicy
+  device: auto
+output:
+  base_dir: artifacts
+  run_name: aapl_ppo
