@@ -1,2 +1,0 @@
-[console_scripts]
-algotradex = algotradex.cli:main

@@ -1,1 +1,47 @@
-plotly
+# AlgoTradeX — Python Dependencies
+# Install: pip install -r requirements.txt
+# Or with conda: conda install --file requirements.txt (core only)
+
+# ── Core data / numerics ──────────────────────────────────────────────────
+numpy>=1.26.0
+pandas>=2.1.0
+scipy>=1.11.0
+
+# ── Market data ───────────────────────────────────────────────────────────
+yfinance>=0.2.37
+
+# ── Streamlit dashboard ───────────────────────────────────────────────────
+streamlit>=1.35.0
+
+# ── Visualisation ─────────────────────────────────────────────────────────
+plotly>=5.20.0
+
+# ── Forecasting ───────────────────────────────────────────────────────────
+# Meta Prophet: handles seasonality + holidays
+prophet>=1.1.5
+
+# Google TimesFM (optional — large download, ~800MB model weights)
+# Uncomment to enable zero-shot forecasting:
+# timesfm>=1.0.0
+
+# Optional deep-learning forecaster
+torch>=2.2.0
+
+# ── Sentiment ─────────────────────────────────────────────────────────────
+vaderSentiment>=3.3.2
+
+# ── Environment Variables ─────────────────────────────────────────────────
+python-dotenv>=1.2.2    
+
+# ── Optional: news headline scraping ─────────────────────────────────────
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# ── Development / testing ─────────────────────────────────────────────────
+pytest>=8.0.0
+black>=24.0.0
+ruff>=0.4.0
+# ── Login and Utils ─────────────────────────────────────────────────
+huggingface_hub
+psutil
+timesfm
