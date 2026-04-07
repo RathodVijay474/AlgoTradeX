@@ -1152,7 +1152,7 @@ def main() -> None:
         """
 <div class="atx-hero">
   <div class="atx-wordmark">ATX V5 Quant Intelligence System</div>
-  <h1 class="atx-title">Market-aware <span>autonomous</span> trading stack</h1>
+  <h1 class="atx-title">AlgoTradex <span></span> By Vijay</h1>
   <p class="atx-sub">
     Multi-model forecasting, market regime analysis, alpha sleeves, and strict risk-first execution control.
     Signals are tradeable only when models agree, market conditions support them, and the risk gate approves them.
