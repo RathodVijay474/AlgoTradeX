@@ -331,7 +331,7 @@ def fig_candlestick(ohlcv: pd.DataFrame, signal: EnsembleSignal) -> go.Figure:
         **PLOTLY_BASE,
         height=680,
         title={"text": f"<b>{signal.ticker}</b> price structure", "font": {"size": 15, "color": TEXT}},
-        legend={"orientation": "h", "yanchor": "bottom", "y": 1.02, "bgcolor": "rgba(0,0,0,0)", "font": {"size": 11}},
+        legend={"orientation": "h", "yanchor": "bottom", "y": 1, "bgcolor": "rgba(0,0,0,0)", "font": {"size": 11}},
         xaxis_rangeslider_visible=False,
     )
     fig.update_yaxes(title_text="Price", gridcolor=GRID)
