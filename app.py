@@ -1151,7 +1151,7 @@ def main() -> None:
     st.markdown(
         """
 <div class="atx-hero">
-  <div class="atx-wordmark">ATX V5 Quant Intelligence System</div>
+  <div class="atx-wordmark">Quant Intelligence System</div>
   <h1 class="atx-title">AlgoTradex <span></span> By Vijay</h1>
   <p class="atx-sub">
     Multi-model forecasting, market regime analysis, alpha sleeves, and strict risk-first execution control.
